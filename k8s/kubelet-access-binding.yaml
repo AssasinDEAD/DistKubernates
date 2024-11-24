@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubelet-access-binding
+  namespace: kube-system
+subjects:
+  - kind: ServiceAccount
+    name: kubelet-access
+    namespace: kube-system
+roleRef:
+  kind: Role
+  name: kubelet-access-role
+  apiGroup: rbac.authorization.k8s.io

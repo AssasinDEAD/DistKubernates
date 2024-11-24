@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kubelet-access-token
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: kubelet-access
+type: kubernetes.io/service-account-token

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookshop-app
+  labels:
+    app: bookshop
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bookshop
+  template:
+    metadata:
+      labels:
+        app: bookshop
+    spec:
+      containers:
+        - name: bookshop-app
+          image: bookshop-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-config
+                  key: host
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: redis-config
+                  key: port
+            - name: PGHOST
+              value: "postgres-service" # имя сервиса PostgreSQL в кластере
+            - name: PGUSER
+              value: "postgres" # имя пользователя
+            - name: PGPASSWORD
+              value: "Serik2004" # пароль пользователя PostgreSQL
+            - name: PGDATABASE
+              value: "for_books" # имя базы данных
+            - name: PGPORT
+              value: "5432" # порт PostgreSQL

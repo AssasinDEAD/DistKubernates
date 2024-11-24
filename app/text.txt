@@ -1,0 +1,53 @@
+
+http://localhost:3000/auth/login
+
+{
+  "userId": "1"  
+}
+
+
+http://localhost:3000/books
+
+{
+  "title": "The Pragmatic Programmer",
+  "author": "Andrew Hunt and David Thomas",
+  "price": 45.00,
+  "genre": "Programming",
+  "description": "A comprehensive guide to software craftsmanship."
+}
+
+
+http://localhost:3000/books/{bookId}
+
+{
+  "title": "Updated Title",
+  "price": 50.00
+}
+
+http://localhost:3000/books/{bookId}
+
+http://localhost:3000/books/popular
+
+http://localhost:3000/auth/logout
+
+
+
+docker exec -it redis-redis-1 redis-cli
+KEYS *
+GET session:<sessionId>
+TTL session:<sessionId>
+ZREVRANGE popular_books 0 -1 WITHSCORES
+DEL session:<sessionId>
+
+•	GET KEY - получение значения по ключу.
+•	SET KEY VALUE - установка значения для указанного ключа.
+•	EXISTS KEY - проверка существования ключа.
+•	DEL KEY - удаление ключа.
+•	QUIT - завершение сеанса redis-cli и выход из терминала Redis.
+•	FLUSHALL - очищает все ключи в текущей базе данных Redis.
+•	SET KEY VALUE EX TIME - устанавливает значение для указанного ключа с заданным временем жизни (в секундах).
+Например, SET product iPhone EX 10 устанавливает значение "iPhone" для ключа "product" с временем жизни 10 секунд.
+•	TTL product - показывает оставшееся время жизни (time-to-live) для ключа "product".
+•	GET KEY - получает значение по указанному ключу. Для истекшего ключа будет возвращено значение nil
+•	EXISTS KEY - проверяет, существует ли ключ.
+•	GETSET - атомарно получает старое значение ключа и устанавливает новое значение.
